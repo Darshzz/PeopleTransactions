@@ -6,25 +6,51 @@
 //
 
 import UIKit
-import RxDataSources
+import RxSwift
+import RxCocoa
 
-class TransactionsViewController: UIViewController, Storyboarded {
+class TransactionsViewController: ViewController<TransactionViewModel>, Storyboarded {
 
     // MARK:- Properties
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: TransactionViewModelPresentable!
+    let fetchData: PublishSubject<()> = .init()
+    let selectItemEvent: PublishSubject<TransactionsModel> = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let result = viewModel.fetchTransactions()
+        setupOutput()
+        fetchData.onNext(())
+    }
+    
+    
+    override func setupOutput() {
+        super.setupOutput()
+        
+        let input = TransactionViewModel.Input(fetchSignal: fetchData.asObservable(), selectModelTapSignal: selectItemEvent, disposeBag: disposeBag)
+          viewModel.transform(input, outputHandler: setupInput(input:))
+      }
+    
+    override func setupInput(input: TransactionViewModel.Output) {
+        super.setupInput(input: input)
+        
+        disposeBag.insert([
+            setUpTableViewObserving(signal: input.updateTableViewSignal)
+        ])
+    }
+
+    func setUpTableViewObserving(signal: Driver<[TransactionsModel]>) -> Disposable {
+        signal
+            .drive(with: self, onNext: { (`self`, result) in
+                print(result)
+                self.bindTableViewData(Observable.of(result))
+            })
+    }
+    
+    func bindTableViewData(_ result: Observable<[TransactionsModel]>) {
         _ = result.bind(to: tableView.rx.items(cellIdentifier: "TransactionTableCell", cellType: TransactionTableCell.self)) { ( row, model, cell) in
             cell.configureData(model: model)
          }
-                
     }
-
-
 }
-

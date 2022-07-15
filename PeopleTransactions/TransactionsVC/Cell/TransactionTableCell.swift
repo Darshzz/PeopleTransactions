@@ -21,11 +21,13 @@ class TransactionTableCell: UITableViewCell {
     }
 
     func configureData(model: TransactionsModel) {
-        lblDate.text = model.transactionDate
+        lblDate.text = model.transactionDate.mmddyyyy
         lblSummary.text = model.summary
         
         let value = model.debit == 0 ? model.credit : model.debit
         lblAmount.text = model.debit == 0 ? "+$\(value)" : "-$\(value)"
         lblAmount.textColor = model.debit == 0 ? .green : .red
+        
+        lblGSTNote.text = "Transaction includes 15% GST $\(value.gst)"
     }
 }

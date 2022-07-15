@@ -34,6 +34,11 @@
 		3EBB1104288016250023D10D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB1103288016250023D10D /* DetailsViewController.swift */; };
 		3EBB11062880170D0023D10D /* DetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB11052880170D0023D10D /* DetailsCoordinator.swift */; };
 		3EBB11092880194A0023D10D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB11082880194A0023D10D /* AppCoordinator.swift */; };
+		3EBB110F2880AB060023D10D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB110E2880AB050023D10D /* ViewController.swift */; };
+		3EBB11112881312C0023D10D /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB11102881312C0023D10D /* ViewModelProtocol.swift */; };
+		3EBB1115288132290023D10D /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB1114288132290023D10D /* DetailsViewModel.swift */; };
+		3EBB11182881892C0023D10D /* DateFormatter+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB11172881892C0023D10D /* DateFormatter+Addition.swift */; };
+		3EBB111A28819AE00023D10D /* Double+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB111928819AE00023D10D /* Double+Addition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +72,7 @@
 		3EBB10C1287E71F80023D10D /* PeopleTransactionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeopleTransactionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EBB10C5287E71F80023D10D /* PeopleTransactionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTransactionsUITests.swift; sourceTree = "<group>"; };
 		3EBB10C7287E71F80023D10D /* PeopleTransactionsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTransactionsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3EBB10E9287E8FDD0023D10D /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = SOURCE_ROOT; };
+		3EBB10E9287E8FDD0023D10D /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionViewModel.swift; path = PeopleTransactions/TransactionsVC/Model/TransactionViewModel.swift; sourceTree = SOURCE_ROOT; };
 		3EBB10EC287E903E0023D10D /* TransactionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableCell.swift; sourceTree = "<group>"; };
 		3EBB10EE287ECC790023D10D /* TransactionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsCoordinator.swift; sourceTree = "<group>"; };
 		3EBB10F3287ECD0B0023D10D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -79,6 +84,11 @@
 		3EBB1103288016250023D10D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3EBB11052880170D0023D10D /* DetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCoordinator.swift; sourceTree = "<group>"; };
 		3EBB11082880194A0023D10D /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		3EBB110E2880AB050023D10D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3EBB11102881312C0023D10D /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
+		3EBB1114288132290023D10D /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		3EBB11172881892C0023D10D /* DateFormatter+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Addition.swift"; sourceTree = "<group>"; };
+		3EBB111928819AE00023D10D /* Double+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Addition.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,11 +180,10 @@
 		3EBB10E7287E8F4F0023D10D /* TransactionsVC */ = {
 			isa = PBXGroup;
 			children = (
+				3EBB1112288131DF0023D10D /* Model */,
 				3EBB10F0287ECCD20023D10D /* Coordinator */,
 				3EBB10EB287E901C0023D10D /* Cell */,
 				3EBB10A8287E71F40023D10D /* TransactionsViewController.swift */,
-				3EBB10E9287E8FDD0023D10D /* TransactionViewModel.swift */,
-				3EBB10F9287EF4B30023D10D /* TransactionsModel.swift */,
 			);
 			path = TransactionsVC;
 			sourceTree = "<group>";
@@ -198,8 +207,10 @@
 		3EBB10F1287ECCF00023D10D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				3EBB110D2880AAEC0023D10D /* Base MVVM */,
 				3EBB1107288019260023D10D /* AppCoordinator */,
 				3EBB10F2287ECCFA0023D10D /* Protocol */,
+				3EBB11162881890F0023D10D /* Extensions */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -209,6 +220,7 @@
 			children = (
 				3EBB10F3287ECD0B0023D10D /* Coordinator.swift */,
 				3EBB10F7287EE91F0023D10D /* Storyboarded.swift */,
+				3EBB11102881312C0023D10D /* ViewModelProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -232,6 +244,7 @@
 		3EBB1101288014350023D10D /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3EBB1113288131F80023D10D /* Model */,
 				3EBB11022880144D0023D10D /* Coordinator */,
 				3EBB1103288016250023D10D /* DetailsViewController.swift */,
 			);
@@ -253,6 +266,40 @@
 				3EBB11082880194A0023D10D /* AppCoordinator.swift */,
 			);
 			path = AppCoordinator;
+			sourceTree = "<group>";
+		};
+		3EBB110D2880AAEC0023D10D /* Base MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				3EBB110E2880AB050023D10D /* ViewController.swift */,
+			);
+			path = "Base MVVM";
+			sourceTree = "<group>";
+		};
+		3EBB1112288131DF0023D10D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3EBB10E9287E8FDD0023D10D /* TransactionViewModel.swift */,
+				3EBB10F9287EF4B30023D10D /* TransactionsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3EBB1113288131F80023D10D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3EBB1114288132290023D10D /* DetailsViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3EBB11162881890F0023D10D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3EBB11172881892C0023D10D /* DateFormatter+Addition.swift */,
+				3EBB111928819AE00023D10D /* Double+Addition.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,7 +460,12 @@
 				3EBB11062880170D0023D10D /* DetailsCoordinator.swift in Sources */,
 				3EBB11092880194A0023D10D /* AppCoordinator.swift in Sources */,
 				3EBB1104288016250023D10D /* DetailsViewController.swift in Sources */,
+				3EBB111A28819AE00023D10D /* Double+Addition.swift in Sources */,
+				3EBB110F2880AB060023D10D /* ViewController.swift in Sources */,
+				3EBB11112881312C0023D10D /* ViewModelProtocol.swift in Sources */,
+				3EBB11182881892C0023D10D /* DateFormatter+Addition.swift in Sources */,
 				3EBB10F6287EE5720023D10D /* BaseCoordinator.swift in Sources */,
+				3EBB1115288132290023D10D /* DetailsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
