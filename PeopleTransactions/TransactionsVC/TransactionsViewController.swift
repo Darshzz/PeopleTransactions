@@ -28,7 +28,7 @@ class TransactionsViewController: ViewController<TransactionViewModel>, Storyboa
     override func setupOutput() {
         super.setupOutput()
         
-        let input = TransactionViewModel.Input(fetchSignal: fetchData.asObservable(), selectModelTapSignal: selectItemEvent, disposeBag: disposeBag)
+        let input = TransactionViewModel.Input(fetchSignal: fetchData.asObservable(), disposeBag: disposeBag)
           viewModel.transform(input, outputHandler: setupInput(input:))
       }
     
@@ -36,7 +36,8 @@ class TransactionsViewController: ViewController<TransactionViewModel>, Storyboa
         super.setupInput(input: input)
         
         disposeBag.insert([
-            setUpTableViewObserving(signal: input.updateTableViewSignal)
+            setUpTableViewObserving(signal: input.updateTableViewSignal),
+            setUpTableViewItemSelect(signal: input.selectModelTapSignal)
         ])
     }
 
@@ -48,9 +49,24 @@ class TransactionsViewController: ViewController<TransactionViewModel>, Storyboa
             })
     }
     
+    func setUpTableViewItemSelect(signal: PublishSubject<TransactionsModel>) -> Disposable {
+        
+        tableView.rx.modelSelected(TransactionsModel.self)
+                .subscribe(onNext: { model in
+                    signal.onNext(model)
+                    
+                    // Just to remove greyed out selected cell color after selection of item.
+                    if let selectedRowIndexPath = self.tableView.indexPathForSelectedRow {
+                      self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
+                    }
+                })
+    }
+    
     func bindTableViewData(_ result: Observable<[TransactionsModel]>) {
+       
         _ = result.bind(to: tableView.rx.items(cellIdentifier: "TransactionTableCell", cellType: TransactionTableCell.self)) { ( row, model, cell) in
             cell.configureData(model: model)
-         }
+        }
+        .disposed(by: disposeBag)
     }
 }

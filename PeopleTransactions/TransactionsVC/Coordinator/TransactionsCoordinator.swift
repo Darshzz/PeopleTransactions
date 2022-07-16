@@ -23,19 +23,28 @@ class TransactionsCoordinator: BaseCoordinator<Void> {
         let viewController = TransactionsViewController.instantiate()
         
         viewController.viewModel = viewModel
+        setUpDetailController(viewModel: viewModel)
         
         navigationController.pushViewController(viewController, animated: true)
         
         return Observable.never()
     }
     
-    func pushToDetailsController() -> Observable<DetailsCoordinationResult> {
+    func setUpDetailController(viewModel: TransactionViewModel) {
+        
+        _ = viewModel.selectItemEvent
+            .subscribe(onNext: { [weak self] model in
+                self?.pushToDetailsController(model: model)
+                    .subscribe()
+                    .dispose()
+            })
+                .disposed(by: disposeBag)
+    }
+    
+    func pushToDetailsController(model: TransactionsModel) -> Observable<DetailsCoordinationResult> {
         
         let detailsCoordinator = DetailsCoordinator(navigationController: navigationController)
-        let viewController = DetailsViewController.instantiate()
-        
-        navigationController.pushViewController(viewController, animated: true)
-        
+        detailsCoordinator.model = model
         return self.coordinate(to: detailsCoordinator)
     }
 }

@@ -7,29 +7,39 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
-class DetailsViewController: UIViewController, Storyboarded {
-
+/// Show details of Transactions
+class DetailsViewController: ViewController<DetailsViewModel>, Storyboarded {
+    
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblSummary: UILabel!
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var lblNote: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
-    
-    let disposeBag = DisposeBag()
-    
-    private let _cancel = PublishSubject<Void>()
-    var didCancel: Observable<Void> { return _cancel.asObservable() }
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupBindings()
+        configureData()
     }
     
+    private func configureData() {
+        lblDate.text = viewModel.model.transactionDate.mmddyyyy
+        lblSummary.text = viewModel.model.summary
+        
+        let value = viewModel.model.debit == 0 ? viewModel.model.credit : viewModel.model.debit
+        lblAmount.text = viewModel.model.debit == 0 ? "+$\(value)" : "-$\(value)"
+        lblAmount.textColor = viewModel.model.debit == 0 ? .green : .red
+        
+        lblNote.text = "Transaction includes 15% GST $\(value.gst)"
+    }
+    
+    // View Controller UI actions to the View Model
     private func setupBindings() {
-            cancelButton.rx.tap
-                .bind(to: _cancel)
-                .disposed(by: disposeBag)
-        }
+        cancelButton.rx.tap
+            .bind(to: viewModel.cancel)
+            .disposed(by: disposeBag)
+    }
 }

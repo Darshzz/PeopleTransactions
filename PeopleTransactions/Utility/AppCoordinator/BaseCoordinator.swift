@@ -25,6 +25,7 @@ class BaseCoordinator<ResultType> {
         childCoordinators[coordinator.identifier] = nil
     }
 
+    // Store each coordinator and trigger their start() funciton
     func coordinate<T>(to coordinator: BaseCoordinator<T>) -> Observable<T> {
         store(coordinator: coordinator)
         return coordinator.start()

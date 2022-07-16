@@ -126,7 +126,7 @@
         <!--Details View Controller-->
         <scene sceneID="j1A-yg-XgJ">
             <objects>
-                <viewController id="ZaC-so-mys" customClass="DetailsViewController" customModule="PeopleTransactions" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" id="ZaC-so-mys" customClass="DetailsViewController" customModule="PeopleTransactions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eDu-VV-f3A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

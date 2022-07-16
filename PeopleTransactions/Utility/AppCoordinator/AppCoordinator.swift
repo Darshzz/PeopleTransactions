@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 
+// AppCoordinator is responsible for presenting the initial controller for the app.
 class AppCoordinator: BaseCoordinator<Void> {
     
     let window : UIWindow
@@ -20,6 +21,7 @@ class AppCoordinator: BaseCoordinator<Void> {
     override func start() -> Observable<Void> {
 
         let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
         let transactionCoordinator = TransactionsCoordinator(navigationController: navigationController)
 
         window.rootViewController = navigationController
