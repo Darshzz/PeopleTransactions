@@ -39,20 +39,3 @@ class TransactionsViewModelTest: XCTestCase {
     }
     
 }
-
-/*
- func test_LanguageChange_UpdatesRepositories() {
-     githubService.repositoriesReturnValue = .just([testRepository])
-
-     testScheduler.createHotObservable([next(300, ())])
-         .bind(to: viewModel.reload)
-         .disposed(by: disposeBag)
-
-     testScheduler.createHotObservable([next(400, "Objective-C")])
-         .bind(to: viewModel.setCurrentLanguage)
-         .disposed(by: disposeBag)
-
-     let result = testScheduler.start { self.viewModel.repositories.map({ _ in true }) }
-     XCTAssertEqual(result.events, [next(300, true), next(400, true)])
- }
- */
